@@ -22,7 +22,7 @@ data class User(
 
     @get:JvmName(name = "password")
     @Column(nullable = false)
-    val password: String,
+    var password: String,
 
     @Column(nullable = false)
     val role: Role = Role.USER

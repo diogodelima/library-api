@@ -31,6 +31,8 @@ class SecurityConfig(
                 it
                     .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                     .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/auth/forgotpassword/*").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/auth/resetpassword").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter::class.java)

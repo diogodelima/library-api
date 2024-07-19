@@ -1,6 +1,8 @@
 package com.diogo.library.exceptions.handler
 
 import com.diogo.library.exceptions.EmailAlreadyExistsException
+import com.diogo.library.exceptions.TokenExpiredException
+import com.diogo.library.exceptions.TokenNotFoundException
 import com.diogo.library.exceptions.UsernameAlreadyExistsException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -14,7 +16,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 class ExceptionHandler: ResponseEntityExceptionHandler() {
 
-    @ExceptionHandler(UsernameNotFoundException::class, UsernameAlreadyExistsException::class, EmailAlreadyExistsException::class)
+    @ExceptionHandler(
+        UsernameNotFoundException::class, UsernameAlreadyExistsException::class, EmailAlreadyExistsException::class,
+        TokenExpiredException::class, TokenNotFoundException::class
+    )
     fun usernameNotFoundExceptionHandler(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
         return handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.BAD_REQUEST, request)
     }

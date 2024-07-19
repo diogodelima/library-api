@@ -14,3 +14,4 @@ This project consists of a management system for a library, which can register u
 # Features
 
 - Implemented Spring Security with Bearer Token authentication for secure access to protected endpoints.
+- Password reset system with token expiration using [Schedule Tasks](https://spring.io/guides/gs/scheduling-tasks)
