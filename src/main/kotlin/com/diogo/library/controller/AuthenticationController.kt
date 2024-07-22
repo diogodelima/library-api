@@ -15,6 +15,7 @@ import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.PathVariable
@@ -111,6 +112,17 @@ class AuthenticationController(
         user.password = passwordEncoder.encode(request.password)
 
         userService.save(user)
+        return ResponseEntity.ok("Password changed successfully")
+    }
+
+    @PostMapping("/changepassword")
+    fun changePassword(@RequestBody @Valid request: ChangePasswordRequestDto): ResponseEntity<String> {
+
+        val user = SecurityContextHolder.getContext().authentication.principal as User
+
+        user.password = passwordEncoder.encode(request.password)
+        userService.save(user)
+
         return ResponseEntity.ok("Password changed successfully")
     }
 
