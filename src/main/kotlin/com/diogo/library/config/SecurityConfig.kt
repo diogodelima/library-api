@@ -37,6 +37,7 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.GET, "/author/*").permitAll()
                     .requestMatchers(HttpMethod.POST, "/author/create").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST, "/book/create").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/book/update").hasRole("ADMIN")
                     .anyRequest().authenticated()
             }
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter::class.java)

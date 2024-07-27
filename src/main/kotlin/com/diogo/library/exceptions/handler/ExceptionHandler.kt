@@ -25,8 +25,13 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
         BookNotFoundException::class, TokenNotFoundException::class, AuthorNotFoundException::class,
         LanguageNotFoundException::class
     )
-    fun notFoundException(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
+    fun notFoundExceptionHandler(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
         return handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.NOT_FOUND, request)
+    }
+
+    @ExceptionHandler(com.auth0.jwt.exceptions.TokenExpiredException::class)
+    fun loginTokenExpiredExceptionHandler(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
+        return handleExceptionInternal(ex, "You login token is expired", HttpHeaders(), HttpStatus.BAD_REQUEST, request)
     }
 
 }

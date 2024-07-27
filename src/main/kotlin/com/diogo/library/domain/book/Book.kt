@@ -14,29 +14,29 @@ data class Book(
     val id: Long? = null,
 
     @Column(nullable = false)
-    val title: String,
+    var title: String,
 
     @Column(nullable = false)
-    val isbn: String,
+    var isbn: String,
 
     @Column(nullable = false)
-    val releaseDate: LocalDate,
+    var releaseDate: LocalDate,
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    val synopsis: String,
+    var synopsis: String,
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    val language: Language,
+    var language: Language,
 
     @Column(nullable = false)
-    val publisher: String,
+    var publisher: String,
 
     @Column(nullable = false)
-    val collection: String,
+    var collection: String,
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
-    val author: Author
+    var author: Author
 
 )
