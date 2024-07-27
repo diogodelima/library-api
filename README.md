@@ -2,6 +2,7 @@
 
 This is a personal project using [Kotlin](https://kotlinlang.org/) with the following frameworks:
 
+- [kotlinx.serialization](https://kotlinlang.org/docs/serialization.html)
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Data](https://spring.io/projects/spring-data)
 - [Spring Security](https://spring.io/projects/spring-security)
