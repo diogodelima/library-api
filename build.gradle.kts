@@ -1,4 +1,5 @@
 plugins {
+	kotlin("plugin.serialization") version "2.0.0"
 	id("org.springframework.boot") version "3.3.1"
 	id("io.spring.dependency-management") version "1.1.5"
 	kotlin("plugin.jpa") version "1.9.24"
@@ -20,6 +21,7 @@ repositories {
 }
 
 dependencies {
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
 	implementation("com.auth0:java-jwt:4.4.0")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")

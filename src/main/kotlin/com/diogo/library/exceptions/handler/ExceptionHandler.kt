@@ -1,9 +1,6 @@
 package com.diogo.library.exceptions.handler
 
-import com.diogo.library.exceptions.EmailAlreadyExistsException
-import com.diogo.library.exceptions.TokenExpiredException
-import com.diogo.library.exceptions.TokenNotFoundException
-import com.diogo.library.exceptions.UsernameAlreadyExistsException
+import com.diogo.library.exceptions.*
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,10 +15,17 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(
         UsernameNotFoundException::class, UsernameAlreadyExistsException::class, EmailAlreadyExistsException::class,
-        TokenExpiredException::class, TokenNotFoundException::class
+        TokenExpiredException::class
     )
-    fun usernameNotFoundExceptionHandler(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
+    fun generalExceptionHandler(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
         return handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.BAD_REQUEST, request)
+    }
+
+    @ExceptionHandler(
+        BookNotFoundException::class, TokenNotFoundException::class, AuthorNotFoundException::class
+    )
+    fun notFoundException(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
+        return handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.NOT_FOUND, request)
     }
 
 }

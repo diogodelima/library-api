@@ -25,6 +25,7 @@ data class User(
     var password: String,
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     val role: Role = Role.USER
 
 ): UserDetails{
