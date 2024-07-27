@@ -15,4 +15,8 @@ class BookService(
         return bookRepository.findById(id).orElse(null)
     }
 
+    fun save(book: Book): Book {
+        return bookRepository.save(book)
+    }
+
 }

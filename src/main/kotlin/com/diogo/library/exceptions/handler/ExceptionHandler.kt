@@ -15,14 +15,15 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(
         UsernameNotFoundException::class, UsernameAlreadyExistsException::class, EmailAlreadyExistsException::class,
-        TokenExpiredException::class
+        TokenExpiredException::class, DateFormatException::class
     )
     fun generalExceptionHandler(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
         return handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.BAD_REQUEST, request)
     }
 
     @ExceptionHandler(
-        BookNotFoundException::class, TokenNotFoundException::class, AuthorNotFoundException::class
+        BookNotFoundException::class, TokenNotFoundException::class, AuthorNotFoundException::class,
+        LanguageNotFoundException::class
     )
     fun notFoundException(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
         return handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.NOT_FOUND, request)

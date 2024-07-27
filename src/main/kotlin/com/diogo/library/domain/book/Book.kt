@@ -20,12 +20,9 @@ data class Book(
     val isbn: String,
 
     @Column(nullable = false)
-    val ean: String,
-
-    @Column(nullable = false)
     val releaseDate: LocalDate,
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     val synopsis: String,
 
     @Column(nullable = false)
