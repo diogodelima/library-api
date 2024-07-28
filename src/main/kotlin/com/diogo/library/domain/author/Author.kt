@@ -11,14 +11,14 @@ data class Author(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    val firstName: String,
+    var firstName: String,
 
-    val lastName: String,
+    var lastName: String,
 
-    val biography: String,
+    var biography: String,
 
     @OneToMany(mappedBy = "author", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val books: MutableCollection<Book>
+    var books: MutableCollection<Book>
 
 ){
 

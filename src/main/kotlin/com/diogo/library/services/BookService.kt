@@ -19,4 +19,8 @@ class BookService(
         return bookRepository.save(book)
     }
 
+    fun delete(id: Long) {
+        bookRepository.deleteById(id)
+    }
+
 }

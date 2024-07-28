@@ -13,6 +13,7 @@ import com.diogo.library.services.AuthorService
 import com.diogo.library.services.BookService
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -110,6 +111,12 @@ class BookController(
             )
         )
 
+    }
+
+    @DeleteMapping("/delete/{bookId}")
+    fun delete(@PathVariable bookId: Long): ResponseEntity<String> {
+        bookService.delete(bookId)
+        return ResponseEntity.ok("Book deleted successfully")
     }
 
 }

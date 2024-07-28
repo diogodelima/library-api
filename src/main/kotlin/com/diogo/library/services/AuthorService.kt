@@ -19,4 +19,8 @@ class AuthorService(
         return authorRepository.save(author)
     }
 
+    fun delete(id: Long) {
+        authorRepository.deleteById(id)
+    }
+
 }
