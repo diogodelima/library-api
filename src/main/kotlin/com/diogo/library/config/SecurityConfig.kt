@@ -35,6 +35,7 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.POST, "/auth/resetpassword").permitAll()
                     .requestMatchers(HttpMethod.GET, "/book/list/*").permitAll()
                     .requestMatchers(HttpMethod.GET, "/book/*").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/author/list/*").permitAll()
                     .requestMatchers(HttpMethod.GET, "/author/*").permitAll()
                     .requestMatchers(HttpMethod.POST, "/author/create").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PUT, "/author/update").hasRole("ADMIN")

@@ -1,12 +1,10 @@
 package com.diogo.library.dto
 
 import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-@Serializable
-data class PageBookResponseDto(
+data class PageResponseDto<T>(
 
-    val books: Collection<BookResponseDto>,
+    val data: Collection<T>,
 
     val page: Int,
 

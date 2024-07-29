@@ -3,9 +3,9 @@ package com.diogo.library.controller
 import com.diogo.library.domain.book.Book
 import com.diogo.library.domain.language.Language
 import com.diogo.library.dto.BookCreateRequestDto
-import com.diogo.library.dto.PageBookResponseDto
 import com.diogo.library.dto.BookResponseDto
 import com.diogo.library.dto.BookUpdateRequestDto
+import com.diogo.library.dto.PageResponseDto
 import com.diogo.library.exceptions.*
 import com.diogo.library.services.AuthorService
 import com.diogo.library.services.BookService
@@ -47,7 +47,7 @@ class BookController(
     }
 
     @GetMapping("/list/{nPage}")
-    fun list(@PathVariable nPage: Int): ResponseEntity<PageBookResponseDto> {
+    fun list(@PathVariable nPage: Int): ResponseEntity<PageResponseDto<BookResponseDto>> {
 
         if (nPage <= 0)
             throw PageInvalidException()
@@ -55,14 +55,14 @@ class BookController(
         val page = bookService.getPage(nPage, pageSize)
 
         return ResponseEntity.ok(
-            PageBookResponseDto(
+            PageResponseDto(
                 page.content.map {
                     BookResponseDto(
                         it.id!!, it.title, it.isbn, it.releaseDate.toString(), it.synopsis,
                         it.language.name, it.publisher, it.collection, it.author.id!!
                     )
                 },
-                page.number,
+                page.number + 1,
                 page.size,
                 page.totalPages
             )
