@@ -15,7 +15,7 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(
         UsernameNotFoundException::class, UsernameAlreadyExistsException::class, EmailAlreadyExistsException::class,
-        TokenExpiredException::class, DateFormatException::class
+        TokenExpiredException::class, DateFormatException::class, PageInvalidException::class
     )
     fun generalExceptionHandler(ex: Exception, request: WebRequest): ResponseEntity<Any>? {
         return handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.BAD_REQUEST, request)

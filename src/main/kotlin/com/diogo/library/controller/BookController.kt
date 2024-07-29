@@ -3,15 +3,14 @@ package com.diogo.library.controller
 import com.diogo.library.domain.book.Book
 import com.diogo.library.domain.language.Language
 import com.diogo.library.dto.BookCreateRequestDto
+import com.diogo.library.dto.PageBookResponseDto
 import com.diogo.library.dto.BookResponseDto
 import com.diogo.library.dto.BookUpdateRequestDto
-import com.diogo.library.exceptions.AuthorNotFoundException
-import com.diogo.library.exceptions.BookNotFoundException
-import com.diogo.library.exceptions.DateFormatException
-import com.diogo.library.exceptions.LanguageNotFoundException
+import com.diogo.library.exceptions.*
 import com.diogo.library.services.AuthorService
 import com.diogo.library.services.BookService
 import jakarta.validation.Valid
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -29,7 +28,10 @@ import java.time.format.DateTimeParseException
 class BookController(
 
     private val bookService: BookService,
-    private val authorService: AuthorService
+    private val authorService: AuthorService,
+
+    @Value("\${page.size}")
+    private val pageSize: Int
 
 ) {
 
@@ -40,6 +42,29 @@ class BookController(
             BookResponseDto(
                 book.id!!, book.title, book.isbn, book.releaseDate.toString(), book.synopsis,
                 book.language.name, book.publisher, book.collection, book.author.id!!
+            )
+        )
+    }
+
+    @GetMapping("/list/{nPage}")
+    fun list(@PathVariable nPage: Int): ResponseEntity<PageBookResponseDto> {
+
+        if (nPage <= 0)
+            throw PageInvalidException()
+
+        val page = bookService.getPage(nPage, pageSize)
+
+        return ResponseEntity.ok(
+            PageBookResponseDto(
+                page.content.map {
+                    BookResponseDto(
+                        it.id!!, it.title, it.isbn, it.releaseDate.toString(), it.synopsis,
+                        it.language.name, it.publisher, it.collection, it.author.id!!
+                    )
+                },
+                page.number,
+                page.size,
+                page.totalPages
             )
         )
     }

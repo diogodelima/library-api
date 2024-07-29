@@ -39,8 +39,7 @@ class AuthorController(
             Author(
                 firstName = request.firstName,
                 lastName = request.lastName,
-                biography = request.biography,
-                books = request.books.map { bookService.getById(it) ?: throw BookNotFoundException() }.toMutableList()
+                biography = request.biography
             )
         )
 

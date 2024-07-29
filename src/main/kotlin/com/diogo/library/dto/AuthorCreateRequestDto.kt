@@ -17,9 +17,6 @@ data class AuthorCreateRequestDto(
     val lastName: String,
 
     @field:NotEmpty
-    val biography: String,
-
-    @field:NotNull
-    val books: Collection<Long>
+    val biography: String
 
 )
